@@ -26,3 +26,7 @@ ii)Dossier Access--> they have access personalised dashboard where they only see
 iii)Profile Management--> they can provide updates to the Chief of Station about the mission. 
 iv)Requesting Backup and Gadgets--> they can request backup from Chief of Station.The gadgets are dispatched by Q Branch.
 
+**The Q-Branch**
+This is not a user, it is an automated Inventory System.
+The agents can request a gadgets from a pre-defined list. The Chief of Station is responsible for approved or denying of these requests.
+
