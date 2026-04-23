@@ -35,3 +35,9 @@ The agents can request a gadgets from a pre-defined list. The Chief of Station i
 - Implemented full mission CRUD (create, view, edit, delete)
 - Added agent assignment functionality
 - Implemented session handling and role-based access control
+
+
+**Authentication Guard for Agents**
+1. agent_auth.php inside /attendee
+2. Purpose--> to act as a bouncer for MI6 by establishing a reusable lock. 
+3. This file will be used on top of each page that the **field agent** needs to access.
