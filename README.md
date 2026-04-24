@@ -41,3 +41,13 @@ The agents can request a gadgets from a pre-defined list. The Chief of Station i
 1. agent_auth.php inside /attendee
 2. Purpose--> to act as a bouncer for MI6 by establishing a reusable lock. 
 3. This file will be used on top of each page that the **field agent** needs to access.
+
+
+**Login Page**
+1.Every user to this system will have to go through login.php. It acts as a sigle front door to your entire MI6 system.
+2.When a user submits their email and password, the PHP code queries the users table. 
+If the password is correct, it looks at the role_id column for that specific user.
+3.Based on that role_id, your login.php script acts like a traffic cop and redirects them to their correct, restricted folder:
+•	If role_id == 3 (Field Agent): The script redirects them to attendee/dashboard.php.
+•	If role_id == 2 (Chief of Station / Organiser): You will add an elseif statement to redirect them to organiser/dashboard.php.
+•	If role_id == 1 (Admin): You will add another elseif statement to redirect them to admin/dashboard.php.
