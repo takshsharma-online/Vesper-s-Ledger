@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "SELECT user_id, pass_hash, role_id FROM users WHERE email = ?";
+    $query = "SELECT user_id, pass_hash, role_id, codename FROM users WHERE email = ?";
     $stmt = mysqli_prepare($con, $query);
 
     mysqli_stmt_bind_param($stmt, "s", $email);
@@ -21,8 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['role_id'] = $row['role_id'];
 
+            $_SESSION['codename'] = $row['codename'];
+
             if ($row['role_id'] == 3) {
-                header("Location: attendee/dashboard.php");
+                header("Location: attendee/dashboard_agent.php");
                 exit();
             }
 
