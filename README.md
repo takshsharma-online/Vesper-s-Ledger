@@ -31,11 +31,15 @@ This is not a user, it is an automated Inventory System.
 The agents can request a gadgets from a pre-defined list. The Chief of Station is responsible for approved or denying of these requests.
 
 
-###Organiser Module (23/04)
+** Organiser Module (23/04)
 - Implemented full mission CRUD (create, view, edit, delete)
 - Added agent assignment functionality
 - Implemented session handling and role-based access control
 
+** Authentication Module (26/04)
+- Implemented secure login system with database validation
+- Stored user session data for access control across modules
+- Added role-based access and redirection for Admin, Organiser, and Agent users
 
 **Authentication Guard for Agents**
 1. agent_auth.php inside /attendee

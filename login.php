@@ -4,8 +4,8 @@ require_once 'db.php';//Brings the database connection.
 $error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
     $query = "SELECT user_id, pass_hash, role_id, codename FROM users WHERE email = ?";
     $stmt = mysqli_prepare($con, $query);
@@ -20,12 +20,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['role_id'] = $row['role_id'];
-
             $_SESSION['codename'] = $row['codename'];
 
             if ($row['role_id'] == 3) {
                 header("Location: attendee/dashboard_agent.php");
                 exit();
+            }
+            elseif ($row['role_id'] == 2) {
+                header("Location: organiser/home.php"); // Redirect organiser to their dashboard
+                exit();
+            }
+            elseif ($row['role_id'] == 1) {
+                header("Location: admin/dashboard.php"); // Redirect admin to admin panel
+                exit();
+            }
+             else {
+                $error_message = "Unknown user role.";
             }
 
         } else {
