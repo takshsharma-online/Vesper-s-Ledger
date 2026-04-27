@@ -40,7 +40,9 @@ The agents can request a gadgets from a pre-defined list. The Chief of Station i
 - Implemented secure login system with database validation
 - Stored user session data for access control across modules
 - Added role-based access and redirection for Admin, Organiser, and Agent users
+- Added create_organiser, organiser setup script
 
+------------------------------------
 **Authentication Guard for Agents**
 1. agent_auth.php inside /attendee
 2. Purpose--> to act as a bouncer for MI6 by establishing a reusable lock. 
