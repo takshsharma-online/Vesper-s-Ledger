@@ -3,11 +3,11 @@
 include 'admin_auth.php';
 include 'C:/xampp/htdocs/Vesper-s-Ledger/db.php';
 
-//Read database
+//Read database and get info
 $id = $_GET['id'];
 
 //Update role
-$sql = "UPDATE users
+$sql = "UPDATE user
         SET role 'organiser'
         WHERE user_id=$id";
 
