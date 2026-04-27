@@ -52,6 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>MI6 Secure Login</title>
 </head>
 <body>
+<nav class="navbar">
+    <div class="logo-container">
+        <img src="logo.png" alt="Logo" class="logo">
+    </div>
+</nav>
 <h2>MI6 Secure Access</h2>
 
 <?php if(!empty($error_message)) echo "<p style='color:red;'>$error_message</p>"; ?>
