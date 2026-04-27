@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Connect to database
-require_once 'db.php';
+require_once '../db.php';
 
 // Organiser details
 $email = "m@mi6.gov";
