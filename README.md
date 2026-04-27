@@ -41,6 +41,7 @@ The agents can request a gadgets from a pre-defined list. The Chief of Station i
 - Stored user session data for access control across modules
 - Added role-based access and redirection for Admin, Organiser, and Agent users
 - Added create_organiser, organiser setup script
+- Added logout.php to handle session termination and redirect to login
 
 ------------------------------------
 **Authentication Guard for Agents**
