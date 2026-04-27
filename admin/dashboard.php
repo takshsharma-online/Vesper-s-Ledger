@@ -14,6 +14,15 @@ if ($_SESSION['role_id'] != 1) {
     echo "Access denied";
     exit();
 }
+
+//Logout option
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
