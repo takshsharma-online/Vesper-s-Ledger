@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Connect to the database (Assuming this file is in the main folder next to db.php)
-require_once 'db.php';
+require_once '../db.php';
 
 // 1. The Admin details
 $email = "admin@mi6.gov";
