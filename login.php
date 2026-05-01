@@ -49,7 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>MI6 Secure Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <nav class="navbar">
