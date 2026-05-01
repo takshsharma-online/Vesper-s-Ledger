@@ -43,6 +43,7 @@ The agents can request a gadgets from a pre-defined list. The Chief of Station i
 - Added create_organiser, organiser setup script
 - Added logout.php to handle session termination and redirect to login
 
+** Added missions (01/05)
 
 
 **Authentication Guard for Agents**
