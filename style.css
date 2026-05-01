@@ -52,6 +52,7 @@ a {
 
 a:hover {
     text-decoration: underline;
+    text-decoration-color: #ffffff;
 }
 
 .mission-box {
