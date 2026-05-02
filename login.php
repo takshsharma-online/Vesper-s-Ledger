@@ -1,65 +1,77 @@
 <?php
-session_start();
-include "../db.php";
+session_start();//Starts the session so we can store the user's ID and Role later.
+require_once 'db.php';//Brings the database connection.
+$error_message = '';//
 
-// Check login
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
-    exit();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    $query = "SELECT user_id, pass_hash, role_id, codename FROM users WHERE email = ?";
+    $stmt = mysqli_prepare($con, $query);
+
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+
+        if (password_verify($password, $row['pass_hash'])) {
+
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['role_id'] = $row['role_id'];
+            $_SESSION['codename'] = $row['codename'];
+
+            if ($row['role_id'] == 3) {
+                header("Location: attendee/dashboard_agent.php");
+                exit();
+            }
+            elseif ($row['role_id'] == 2) {
+                header("Location: organiser/home.php"); // Redirect organiser to their dashboard
+                exit();
+            }
+            elseif ($row['role_id'] == 1) {
+                header("Location: admin/dashboard.php"); // Redirect admin to admin panel
+                exit();
+            }
+             else {
+                $error_message = "Unknown user role.";
+            }
+
+        } else {
+            $error_message = "Incorrect password.";
+        }
+    } else {
+        $error_message = "No such user exists.";
+    }
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delete Mission</title>
-
-    <!-- Link to shared CSS file -->
-    <link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
+    <title>MI6 Secure Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<nav class="navbar">
+    <div class="logo-container">
+        <img src="testlogo.png" alt="logo" class="logo">
+        <h2>MI6 Secure Access</h2>
+    </div>
+</nav>
 
-<div class="container">
 
-<?php
-// Check if mission ID is provided
-if (isset($_GET['id'])) {
+<?php if(!empty($error_message)) echo "<p style='color:red;'>$error_message</p>"; ?>
 
-    $mission_id = $_GET['id'];
-    $organiser_id = $_SESSION['user_id'];
+<form action="login.php" method="POST">
+    <label>Email:</label>
+    <input type="email" name="email" required><br><br>
 
-    // IMPORTANT: Only delete if the mission belongs to this organiser
-    $sql = "DELETE FROM missions 
-            WHERE mission_id = '$mission_id' 
-            AND organiser_id = '$organiser_id'";
+    <label>Password:</label>
+    <input type="password" name="password" required><br><br>
 
-    if (mysqli_query($con, $sql)) {
-
-        // Success message (styled)
-        echo "<div class='mission-box'>";
-        echo "<h3>Mission Deleted</h3>";
-        echo "<p>The mission has been successfully removed.</p>";
-        echo "<a href='view_missions.php'>Back to Missions</a>";
-        echo "</div>";
-
-    } else {
-        // Error message
-        echo "<div class='mission-box'>";
-        echo "<h3>Error</h3>";
-        echo "<p>Error deleting mission: " . mysqli_error($con) . "</p>";
-        echo "</div>";
-    }
-
-} else {
-    // No mission selected
-    echo "<div class='mission-box'>";
-    echo "<h3>No Mission Selected</h3>";
-    echo "<p>Please select a mission to delete.</p>";
-    echo "</div>";
-}
-?>
-
-</div>
-
+    <button type="submit">Login</button>
+</form>
 </body>
 </html>
