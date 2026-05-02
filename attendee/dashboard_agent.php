@@ -18,7 +18,8 @@ $result = mysqli_stmt_get_result($stmt);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Agent Dossier</title>
+    <title>Agent Dashboard</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <h1>Welcome, Agent <?php echo htmlspecialchars($_SESSION['codename']); ?></h1>

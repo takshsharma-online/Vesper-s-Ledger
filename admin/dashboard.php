@@ -1,6 +1,15 @@
 <?php
 session_start(); // Start the session to access stored user data
 
+//Logout option
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+
+
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     // If not logged in, redirect to login page
@@ -22,12 +31,14 @@ if ($_SESSION['role_id'] != 1) {
     </head>
     <body>
         <h1>MI6 Command Center</h1>
-        <p>Welcome, Commander.</p>
+        <p>Welcome.</p>
 
         <ul>
             <li><a href="manage_users.php">Manage Agents</a></li>
             <li><a href="audit_logs.php">View Logs</a></li>
-            <li><a href="../logout.php">Logout</a></li>
         </ul>
+        <form method="POST">
+            <button type="submit" name="logout">Logout</button>
+<       /form>
     </body>
 </html>

@@ -43,8 +43,12 @@ The agents can request a gadgets from a pre-defined list. The Chief of Station i
 - Added create_organiser, organiser setup script
 - Added logout.php to handle session termination and redirect to login
 
-** Added missions (01/05)
-
+** Added missions (01/05) 
+- Added navigation option to delete missions from organiser dashboard
+- Extended the mission creation form to include additional fields
+- Added objective, intel description, and creation date
+- Updated database insertion to store full mission details
+- Improved validation to ensure all fields are completed
 
 **Authentication Guard for Agents**
 1. agent_auth.php inside /attendee

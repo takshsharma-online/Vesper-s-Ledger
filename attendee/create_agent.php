@@ -7,10 +7,10 @@ ini_set('display_errors', 1);
 require_once '../db.php';
 
 // 1. The FOUR variables needed for the database
-$email = "009@mi6.gov";
-$password = "password@abc";
+$email = "007@mi6.gov";
+$password = "password123";
 $role_id = 3;
-$codename = "009";
+$codename = "007";
 
 $secure_hash = password_hash($password, PASSWORD_DEFAULT);
 

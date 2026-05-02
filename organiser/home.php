@@ -35,6 +35,9 @@ if ($_SESSION['role_id'] != 2) {
 <!-- Link to view missions created by this organiser -->
 <a href="view_missions.php">View My Missions</a><br><br>
 
+<!-- Link to delete missions page -->
+<a href="delete_missions.php">Delete Missions</a><br><br>
+
 <hr>
 
 <!-- Logout option -->

@@ -13,24 +13,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
     $title = trim($_POST['title']);
     $location = trim($_POST['location']);
+    $objective = trim($_POST['objective']);
+    $intel = trim($_POST['intel']);
+    $date = trim($_POST['date']);
 
     $organiser_id = $_SESSION['user_id'];
 
-    // Basic validation
-    if (empty($title) || empty($location)) {
+    // Validation
+    if (empty($title) || empty($location) || empty($objective) || empty($intel) || empty($date)) {
         echo "Please fill in all fields.";
     } else {
 
         // Insert mission into database
-        $sql = "INSERT INTO missions (title, location, organiser_id)
-                VALUES ('$title', '$location', '$organiser_id')";
+        $sql = "INSERT INTO missions (title, location, organiser_id, objective, intel, date_created)
+                VALUES ('$title', '$location', '$organiser_id', '$objective', '$intel', '$date')";
 
         if (mysqli_query($con, $sql)) {
-
-            // Redirect after success
             header("Location: home.php");
             exit();
-
         } else {
             echo "Error: " . mysqli_error($con);
         }
@@ -48,10 +48,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <h2>Create New Mission</h2>
 
 <form method="POST">
+
     Title: <input type="text" name="title"><br><br>
+
     Location: <input type="text" name="location"><br><br>
 
+    Objective:<br>
+    <textarea name="objective" rows="3" cols="40"></textarea><br><br>
+
+    Intel / Description:<br>
+    <textarea name="intel" rows="4" cols="50"></textarea><br><br>
+
+    Date Created:
+    <input type="text" name="date"><br><br>
+
     <button type="submit">Create Mission</button>
+
 </form>
 
 <br>
