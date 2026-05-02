@@ -19,29 +19,45 @@ if ($_SESSION['role_id'] != 2) {
 <html>
 <head>
     <title>Organiser Dashboard</title>
+
+    <!-- Link to shared CSS file -->
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-<!-- Display welcome message with the user's codename -->
-<h2>Welcome Chief of Station M</h2>
+<div class="container">
 
-<hr>
+    <!-- Display welcome message with the user's codename -->
+    <div class="header">
+        <h1>Welcome Chief of Station <?php echo $_SESSION['codename']; ?></h1>
+    </div>
 
-<h3>Mission Control</h3>
+    <hr>
 
-<!-- Link to create a new mission -->
-<a href="create_mission.php">Create Mission</a><br><br>
+    <h3>Mission Control</h3>
 
-<!-- Link to view missions created by this organiser -->
-<a href="view_missions.php">View My Missions</a><br><br>
+    <!-- Navigation box styled like missions -->
+    <div class="mission-box">
 
-<!-- Link to delete missions page -->
-<a href="delete_missions.php">Delete Missions</a><br><br>
+        <!-- Link to create a new mission -->
+        <p><a href="create_mission.php">Create Mission</a></p>
 
-<hr>
+        <!-- Link to view missions created by this organiser -->
+        <p><a href="view_missions.php">View My Missions</a></p>
 
-<!-- Logout option -->
-<a href="../logout.php">Logout</a>
+        <!-- Link to delete missions page -->
+        <p><a href="delete_missions.php">Delete Missions</a></p>
+
+    </div>
+
+    <hr>
+
+    <!-- Logout option -->
+    <p style="text-align:center;">
+        <a href="../logout.php">Logout</a>
+    </p>
+
+</div>
 
 </body>
 </html>

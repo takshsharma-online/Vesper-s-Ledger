@@ -112,11 +112,11 @@ hr {
     margin: 20px auto;
 }
 
-/* Form container (for login or other forms) */
+/* Form container size adjustment for better layout (for login or other forms) */
 form {
     background: rgba(20, 20, 20, 0.95);
     padding: 40px;
-    width: 320px;
+    width: 420px; /* 🔥 cambiado */
     margin: 80px auto;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
@@ -189,4 +189,29 @@ body::before {
     0% { transform: scale(1); opacity: 0.2; }
     50% { transform: scale(1.1); opacity: 0.4; }
     100% { transform: scale(1); opacity: 0.2; }
+}
+
+/* Textarea styling to match input fields */
+textarea { 
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    background: #0f0f0f;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    border-radius: 5px;
+    outline: none;
+    resize: vertical;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Glow effect when textarea is focused */
+textarea:focus {
+    box-shadow: 0 0 8px #d4af37;
+}
+
+/* Ensures padding and border are included in element width */
+* {
+    box-sizing: border-box;
 }

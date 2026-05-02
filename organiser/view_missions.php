@@ -1,6 +1,6 @@
 <?php
-session_start();
-include "../db.php";
+session_start(); // Start session
+include "../db.php"; // Connect to database
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -20,12 +20,21 @@ $result = mysqli_query($con, $sql);
 <html>
 <head>
     <title>My Missions</title>
+
+    <!-- Link to shared CSS file -->
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-<h2>My Missions</h2>
+<div class="container">
 
-<hr>
+    <!-- Page header -->
+    <div class="header">
+        <h1>My Missions</h1>
+        <p>Active operations under your command</p>
+    </div>
+
+    <hr>
 
 <?php
 // Check if there are missions
@@ -34,33 +43,39 @@ if (mysqli_num_rows($result) > 0) {
     // Loop through each mission
     while ($row = mysqli_fetch_assoc($result)) {
 
-        echo "<div style='margin-bottom:15px;'>";
+        // Mission box container (CSS)
+        echo "<div class='mission-box'>";
 
         // Display mission details
-        echo "<b>Title:</b> " . $row['title'] . "<br>";
-        echo "<b>Location:</b> " . $row['location'] . "<br>";
+        echo "<h3>" . $row['title'] . "</h3>";
+        echo "<p><strong>Location:</strong> " . $row['location'] . "</p>";
 
-        echo "<a href='edit_mission.php?id=" . $row['mission_id'] . "'>Edit</a><br>";
+        // Additional fields added (objective, intel, date)
+        echo "<p><strong>Objective:</strong> " . $row['objective'] . "</p>";
+        echo "<p><strong>Intel:</strong> " . $row['intel'] . "</p>";
+        echo "<p><strong>Date Created:</strong> " . $row['date_created'] . "</p>";
 
-        // Delete button with confirmation popup
+        echo "<br>";
+
+        // Edit mission link
+        echo "<a href='edit_mission.php?id=" . $row['mission_id'] . "'>Edit</a> | ";
+
+        // Delete mission with confirmation
         echo "<a href='delete_mission.php?id=" . $row['mission_id'] . "' 
-                onclick='return confirm(\"Are you sure you want to delete this mission?\")'>Delete Mission
-              </a><br>";
+                onclick='return confirm(\"Are you sure you want to delete this mission?\")'>
+                Delete
+              </a>";
 
-        // Link to manage (assign) agents for this specific mission      
-        echo "<a href='assign_agents.php?id=" . $row['mission_id'] . "'>Manage Agents</a>";
-      
-        echo "</div><hr>";
+        echo "</div>";
     }
 
 } else {
     // If no missions found
-    echo "No missions found.";
+    echo "<p class='no-missions'>No missions found.</p>";
 }
 ?>
 
-<br>
-<a href="home.php">Back to Dashboard</a>
+</div>
 
 </body>
 </html>

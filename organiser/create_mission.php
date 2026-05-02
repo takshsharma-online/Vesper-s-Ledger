@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validation
     if (empty($title) || empty($location) || empty($objective) || empty($intel) || empty($date)) {
-        echo "Please fill in all fields.";
+        $error = "Please fill in all fields.";
     } else {
 
         // Insert mission into database
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: home.php");
             exit();
         } else {
-            echo "Error: " . mysqli_error($con);
+            $error = "Error: " . mysqli_error($con);
         }
     }
 }
@@ -42,32 +42,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Create Mission</title>
+
+    <!-- Link to shared CSS file -->
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-<h2>Create New Mission</h2>
+<div class="container">
 
-<form method="POST">
+    <!-- Page header -->
+    <div class="header">
+        <h1>Create New Mission</h1>
+    </div>
 
-    Title: <input type="text" name="title"><br><br>
+    <hr>
 
-    Location: <input type="text" name="location"><br><br>
+    <!-- Show error if exists -->
+    <?php if (isset($error)) echo "<p>$error</p>"; ?>
 
-    Objective:<br>
-    <textarea name="objective" rows="3" cols="40"></textarea><br><br>
+    <form method="POST">
 
-    Intel / Description:<br>
-    <textarea name="intel" rows="4" cols="50"></textarea><br><br>
+        Title:
+        <input type="text" name="title"><br><br>
 
-    Date Created:
-    <input type="text" name="date"><br><br>
+        Location:
+        <input type="text" name="location"><br><br>
 
-    <button type="submit">Create Mission</button>
+        Objective:<br>
+        <textarea name="objective" rows="3" cols="40"></textarea><br><br>
 
-</form>
+        Intel / Description:<br>
+        <textarea name="intel" rows="4" cols="50"></textarea><br><br>
 
-<br>
-<a href="home.php">Back to Dashboard</a>
+        Date Created:
+        <input type="text" name="date"><br><br>
+
+        <button type="submit">Create Mission</button>
+
+    </form>
+
+    <br>
+
+    <p style="text-align:center;">
+        <a href="home.php">Back to Dashboard</a>
+    </p>
+
+</div>
 
 </body>
 </html>
