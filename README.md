@@ -30,6 +30,7 @@ iv)Requesting Backup and Gadgets--> they can request backup from Chief of Statio
 This is not a user, it is an automated Inventory System.
 The agents can request a gadgets from a pre-defined list. The Chief of Station is responsible for approved or denying of these requests.
 
+--------------------------------------------------------------------------
 
 ** Organiser Module (23/04)
 - Implemented full mission CRUD (create, view, edit, delete)
@@ -49,6 +50,11 @@ The agents can request a gadgets from a pre-defined list. The Chief of Station i
 - Added objective, intel description, and creation date
 - Updated database insertion to store full mission details
 - Improved validation to ensure all fields are completed
+- Applied styling with shared CSS
+- Ensured missions created by organiser are visible on the agent dashboard
+- Fixed routing and file naming issues for mission deletion
+
+---------------------------------------------------------------------------
 
 **Authentication Guard for Agents**
 1. agent_auth.php inside /attendee
