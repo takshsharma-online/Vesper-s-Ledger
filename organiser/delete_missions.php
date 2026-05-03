@@ -32,8 +32,20 @@ if (isset($_GET['id'])) {
             WHERE mission_id = '$mission_id' 
             AND organiser_id = '$organiser_id'";
 
+
     if (mysqli_query($con, $sql)) {
         // Redirect back after deletion
+
+        //AUDIT LOG STARTS HERE
+        $user_id = $_SESSION['user_id'];
+        $action = "Deleted mission";
+        $details = "Mission ID: $mission_id";
+
+        $log_sql = "INSERT INTO audit_logs (user_id, action, details) VALUES (?, ?, ?)";
+        $log_stmt = mysqli_prepare($con, $log_sql);
+        mysqli_stmt_bind_param($log_stmt, "iss", $organiser_id, $action, $details);
+        mysqli_stmt_execute($log_stmt);
+        //AUDIT LOG ENDS HERE
 
         echo "<div class='mission-box'>";
         echo "<h3>Mission Deleted</h3>";
