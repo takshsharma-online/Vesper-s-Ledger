@@ -1,11 +1,15 @@
 <?php
-
 include 'admin_auth.php';
 include '../db.php'; //Database connection
 
-//Get all users from database
+/*Get all users from database*/
 $sql = "SELECT * FROM users";
 $result = mysqli_query($con, $sql);
+
+if (isset($_SESSION['message'])) {
+    echo "<p>" . $_SESSION['message'] . "</p>";
+    unset($_SESSION['message']);
+}
 
 ?>
 
@@ -25,6 +29,12 @@ $result = mysqli_query($con, $sql);
         </nav>
         <br>
         <div class="container">
+            <?php
+            if (isset($_SESSION['message'])) {
+                echo "<p>" . $_SESSION['message'] . "</p>";
+                unset($_SESSION['message']);
+            }
+            ?>
             <table border="1">
                 <tr>
                     <th>User ID</th>
@@ -32,6 +42,7 @@ $result = mysqli_query($con, $sql);
                     <th>Email</th>
                     <th>Role ID</th>
                     <th>Creation Time</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
                 <?php
@@ -45,12 +56,35 @@ $result = mysqli_query($con, $sql);
                             echo "<td>" . $row['email'] . "</td>";
                             echo "<td>" . $row['role_id'] . "</td>";
                             echo "<td>" . $row['created_at'] . "</td>";
+                            echo "<td>" . $row['status'] . "</td>";
                             
-                            echo "<td>
-                                    <a href='promote_user.php?id={$row['user_id']}'>Promote</a><br>
-                                    <a href='suspend_user.php?id={$row['user_id']}'>Suspend</a>
-                                </td>";
+                            echo "<td>";
 
+                            // Promote logic
+                            if ($row['role_id'] == 3) {
+                                echo "<a href='promote_user.php?id={$row['user_id']}&to=2'>Promote to Organiser</a><br>";
+                            }
+                            if ($row['role_id'] == 2) {
+                                echo "<a href='promote_user.php?id={$row['user_id']}&to=1'>Promote to Admin</a><br>";
+                            }
+
+                            // DEMOTE
+                            if ($row['role_id'] == 1) {
+                                echo "<a href='demote_user.php?id={$row['user_id']}&to=2'>Demote to Organiser</a><br>";
+                            } elseif ($row['role_id'] == 2) {
+                                echo "<a href='demote_user.php?id={$row['user_id']}&to=3'>Demote to User</a><br>";
+                            }
+
+                            // Suspend/Unsuspend logic
+                            if ($row['role_id'] != 1) {
+
+                                    if ($row['status'] == 'active') {
+                                        echo "<a href='suspend_user.php?id={$row['user_id']}'>Suspend</a>";
+                                    } else {
+                                        echo "<a href='unsuspend_user.php?id={$row['user_id']}'>Unsuspend</a>";
+                                    }
+                                }
+                            echo "</td>";
                             echo "</tr>";
                         }
                     } else {
