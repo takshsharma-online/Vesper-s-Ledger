@@ -5,7 +5,7 @@ session_start(); // Start the session to access stored user data
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: login.php");
+    header("Location: ../logout.php");
     exit();
 }
 
@@ -27,18 +27,31 @@ if ($_SESSION['role_id'] != 1) {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>MI^ Command Dashboard</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
+        <title>MI6 Command Dashboard</title>
     </head>
     <body>
-        <h1>MI6 Command Center</h1>
-        <p>Welcome.</p>
-
-        <ul>
-            <li><a href="manage_users.php">Manage Agents</a></li>
-            <li><a href="audit_logs.php">View Logs</a></li>
-        </ul>
-        <form method="POST">
-            <button type="submit" name="logout">Logout</button>
-<       /form>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="../testlogo.png" alt="logo" class="logo">
+            <h2>MI6 Command Center</h2>
+        </div>
+    </nav>
+    <div class="header">
+        <h1>Welcome, Director</h1>
+        <p>Dashboard</p>
+    </div>
+    <div class="container">
+            <ul>
+                <li><a href="manage_users.php">Manage Agents</a></li>
+                <li><a href="audit_logs.php">View Logs</a></li>
+            </ul>
+    </div>
+        <footer>
+            <form method="POST">
+                <button type="submit" name="logout">Logout</button>
+            </form>
+        </footer>
     </body>
 </html>

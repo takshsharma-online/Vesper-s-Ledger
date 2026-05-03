@@ -1,56 +1,65 @@
 <?php
 
 include 'admin_auth.php';
-include 'C:/xampp/htdocs/Vesper-s-Ledger/db.php'; //Database connection
+include '../db.php'; //Database connection
 
 //Get all users from database
 $sql = "SELECT * FROM users";
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($con, $sql);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../style.css">
         <title>Manage Users</title>
     </head>
     <body>
-        <h1>MI^ Command - Manage Users</h1>
-        <table border="1">
-            <tr>
-                <th>User ID</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-            <?php
-                //Check users
-                if(mysqli_num_rows($result) > 0) {
-                    //Loop through each row
-                    while ($row = mysqli_fetch_assoc($result)){
-                        echo "<tr>";
-                        echo "<td>" . $row['user_id'] . "</td>";
-                        echo "<td>" . $row['full_name'] . "</td>";
-                        echo "<td>" . $row['email'] . "</td>";
-                        echo "<td>" . $row['role'] . "</td>";
-                        echo "<td>" . $row['status'] . "</td>";
-                        
-                        echo "<td>";
-                        echo "<a href='promote_user.php?id=" . $row[user_id] . "'>Promote</a>";
-                        echo "<a href='suspend_user.php?id=" . $row[user_id] . "'>Suspend</a>";
-                        echo "</td>";
+        <nav class="navbar">
+        <div class="logo-container">
+            <img src="../testlogo.png" alt="logo" class="logo">
+            <h2>MI6 Command - Manage Users</h2>
+        </div>
+        </nav>
+        <br>
+        <div class="container">
+            <table border="1">
+                <tr>
+                    <th>User ID</th>
+                    <th>Code Name</th>
+                    <th>Email</th>
+                    <th>Role ID</th>
+                    <th>Creation Time</th>
+                    <th>Actions</th>
+                </tr>
+                <?php
+                    //Check users
+                    if(mysqli_num_rows($result) > 0) {
+                        //Loop through each row
+                        while ($row = mysqli_fetch_assoc($result)){
+                            echo "<tr>";
+                            echo "<td>" . $row['user_id'] . "</td>";
+                            echo "<td>" . $row['codename'] . "</td>";
+                            echo "<td>" . $row['email'] . "</td>";
+                            echo "<td>" . $row['role_id'] . "</td>";
+                            echo "<td>" . $row['created_at'] . "</td>";
+                            
+                            echo "<td>
+                                    <a href='promote_user.php?id={$row['user_id']}'>Promote</a><br>
+                                    <a href='suspend_user.php?id={$row['user_id']}'>Suspend</a>
+                                </td>";
 
-                        echo "</tr>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='6'>No users found</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='6'>No users found</td></tr>";
-                }
-            ?>
-        </table>
+                ?>
+            </table>
 
-        <p><a href="dashboard.php">Back to Dashboard</a></p>
-
+            <p><a href="dashboard.php">Back to Dashboard</a></p>
+        </div>
     </body>
 </html>
