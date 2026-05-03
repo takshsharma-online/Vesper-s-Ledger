@@ -40,18 +40,23 @@ if ($_SESSION['role_id'] != 1) {
     </nav>
     <div class="header">
         <h1>Welcome, Director</h1>
-        <p>Dashboard</p>
     </div>
+    <hr>
     <div class="container">
-            <ul>
-                <li><a href="manage_users.php">Manage Agents</a></li>
-                <li><a href="audit_logs.php">View Logs</a></li>
-            </ul>
-    </div>
+        <h3>Dashboard</h3>
+        <div class="mission-box">
+            <p><a href="manage_users.php">Manage Agents</a></p>
+        </div>
+        <div class="mission-box">
+            <p><a href="audit_logs.php">View Logs</a></p>
+
+        </div>
+
         <footer>
             <form method="POST">
                 <button type="submit" name="logout">Logout</button>
             </form>
         </footer>
+    </div>
     </body>
 </html>
